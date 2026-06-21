@@ -58,7 +58,40 @@ public class EmployeePractice {
         System.out.println(HighestInEachDep);
 
 
+        //Average Salary by Department
+
+
+        Map<String,Double>averageSal = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.averagingDouble(Employee::getSalary)));
+        System.out.println(averageSal);
+
+        //Find Employees Earning More Than 80000
+
+        Optional<Employee>EarningMoreThan = employees.stream().filter(e -> e.getSalary()>80000).findFirst();
+        System.out.println(EarningMoreThan);
+
+        //Sort Employees by Salary Descending
+
+        List<Employee>sortEmployee = employees.stream().sorted(Comparator.comparingDouble(Employee::getSalary).reversed()).collect(Collectors.toList());
+        System.out.println(sortEmployee);
+
+
+
+        //Find Second Highest Salary Employee
+
+        Optional<Employee>secondHighest = employees.stream().sorted(Comparator.comparingDouble(Employee::getSalary).reversed()).limit(2).skip(1).findFirst();
+        System.out.println(secondHighest);
+
+        //Department Having Highest Number of Employees
+        String department = employees.stream().collect(Collectors.groupingBy(Employee::getName,Collectors.counting())).entrySet()
+                            .stream().max(Map.Entry.comparingByValue()).get().getKey();
+
+        System.out.println(department);
         
+        //Find Employees Above Average Salary
+        double avgSal = employees.stream().mapToDouble(Employee::getSalary).average().orElse(0.0);
+
+        Optional<Employee>avgSalEmp = employees.stream().filter(avg -> avg.getSalary() > avgSal).findFirst();
+        System.out.println(avgSalEmp);
 
     }
     
