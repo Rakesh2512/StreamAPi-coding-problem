@@ -17,7 +17,7 @@ public class CheckPrimeNumber {
                 System.out.println("Given number "+i+" is prime number");
             }
             else{
-                System.out.println("Given number"+i+" is not prime number");
+                System.out.println("Given number "+i+" is not prime number");
             }
         }
         
