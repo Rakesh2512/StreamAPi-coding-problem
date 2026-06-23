@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class EmployeePractice {
@@ -60,7 +59,6 @@ public class EmployeePractice {
 
         //Average Salary by Department
 
-
         Map<String,Double>averageSal = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.averagingDouble(Employee::getSalary)));
         System.out.println(averageSal);
 
@@ -73,7 +71,6 @@ public class EmployeePractice {
 
         List<Employee>sortEmployee = employees.stream().sorted(Comparator.comparingDouble(Employee::getSalary).reversed()).collect(Collectors.toList());
         System.out.println(sortEmployee);
-
 
 
         //Find Second Highest Salary Employee
@@ -92,6 +89,18 @@ public class EmployeePractice {
 
         Optional<Employee>avgSalEmp = employees.stream().filter(avg -> avg.getSalary() > avgSal).findFirst();
         System.out.println(avgSalEmp);
+
+        //partition of Employee based on age > 30
+
+        Map<Boolean,List<Employee>>partition_age = employees.stream().collect(Collectors.partitioningBy(e -> e.getAge() > 30));
+
+        System.out.println(partition_age);
+
+        //Convert List into Map
+
+        Map<Integer,String>IdandName = employees.stream().collect(Collectors.toMap(Employee::getId,Employee::getName));
+        System.out.println(IdandName);
+
 
     }
     
