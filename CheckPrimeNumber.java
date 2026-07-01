@@ -10,7 +10,6 @@ public class CheckPrimeNumber {
         return IntStream.rangeClosed(2, (int)Math.sqrt(n)).noneMatch(i -> n % i == 0);
     }
     public static void main(String[] args) {
-        int n = 5;
 
         for(int i=1;i<=10;i++){
             if(check(i)){
